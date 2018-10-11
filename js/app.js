@@ -150,6 +150,7 @@ const app = new Vue({
       datos.version = this.version
       datos.importancia = this.importancia
       datos.importanciaPorClick = this.importanciaPorClick
+      datos.importanciaPorTick = this.importanciaPorTick
       datos.mejoras = this.mejoras
       datos.mostrandoAlgunaMejora = this.mostrandoAlgunaMejora
       localStorage.setItem(`BOTWv${datos.version}`, JSON.stringify(datos))
@@ -160,6 +161,7 @@ const app = new Vue({
       datos = JSON.parse(datos)
       this.importancia = datos.importancia
       this.importanciaPorClick = datos.importanciaPorClick
+      this.importanciaPorTick = datos.importanciaPorTick
       this.mejoras = datos.mejoras
       this.mostrandoAlgunaMejora = datos.mostrandoAlgunaMejora
       if(this.tieneMejora('EquipoCargo')) this.iniciarTimerEquipo()
