@@ -49,7 +49,7 @@
                       <div>Comprar 1</div>
                       <div>Coste: {{ formatearNumero(mejora.coste) }} Imp</div>
                       <div>Incremento IPC: +{{ mejora.incrementoImportanciaPorClick }}</div>
-                      <div v-if="mejora.incrementoImportanciaPorTick">Incremento IPS: +{{ mejora.incrementoImportanciaPorTick }}/s</div>
+                      <div v-if="mejora.incrementoImportanciaPorTick">Incremento IPS: +{{ (mejora.incrementoImportanciaPorTick + mejora.total + 1) }}/s</div>
                     </button>
                   </div>
                   <div class="col-lg-4">
@@ -57,7 +57,7 @@
                       <div>Comprar 10</div>
                       <div>Coste: {{ formatearNumero(mejora.coste * 10) }} Imp</div>
                       <div>Incremento: +{{ mejora.incrementoImportanciaPorClick * 10 }} IPC</div>
-                      <div v-if="mejora.incrementoImportanciaPorTick">Incremento IPS: +{{ (mejora.incrementoImportanciaPorTick * 10) }}/s</div>
+                      <div v-if="mejora.incrementoImportanciaPorTick">Incremento IPS: +{{ ((mejora.incrementoImportanciaPorTick * 10) + mejora.total + 1) }}/s</div>
                     </button>
                   </div>
                   <div class="col-lg-4">
@@ -65,7 +65,7 @@
                       <div>Comprar 100</div>
                       <div>Coste: {{ formatearNumero(mejora.coste * 100) }} Imp</div>
                       <div>Incremento: +{{ mejora.incrementoImportanciaPorClick * 100 }} IPC</div>
-                      <div v-if="mejora.incrementoImportanciaPorTick">Incremento IPS: +{{ (mejora.incrementoImportanciaPorTick * 100) }}/s</div>
+                      <div v-if="mejora.incrementoImportanciaPorTick">Incremento IPS: +{{ ((mejora.incrementoImportanciaPorTick * 100) + mejora.total + 1) }}/s</div>
                     </button>
                   </div>
                 </div>
