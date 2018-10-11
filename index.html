@@ -28,11 +28,14 @@
       <div class="row">
         <div class="col-sm">
           <div><strong>Importancia</strong> (Imp): {{ formatearNumero(importancia) }}</div>
-          <div><strong>Importancia por click</strong> (IPC): {{ formatearNumero(importanciaPorClick) }}</div>
+          <div><strong>Importancia por click</strong> (IPC): {{ formatearNumero(calcularImportanciaPorClick()) }}</div>
           <div v-if="timers.autoImportancia !== null"><strong>Importancia por segundo</strong>: {{ formatearNumero(calcularImportanciaPorTick()) }}</div>
         </div>
         <div class="col-sm">
           <button class="btn btn-success btn-block" @click="trabajar">Trabajar</button>
+          <div v-if="potenciadorActivo" class="alert alert-info">
+            <strong>{{ potenciadorActivo.nombre }}<br><small>{{ potenciadorActivo.descripcion }}</small></strong>
+          </div>
         </div>
       </div>
     
@@ -72,15 +75,15 @@
               </div>
             </div>
           </div>
-                </div>
         </div>
+      </div>
     
     </div>
   </div>
   <!-- !app -->
 
   <div class="alert alert-info fixed-bottom">
-    Versión en desarrollo. Próximamente más mejoras, multilenguaje y sistema de prestigio.
+    Versión en desarrollo. Próximamente: Potenciadores, multilenguaje y sistema de prestigio.
   </div>
 
 	<script src="js/include.js"></script>

@@ -6,11 +6,13 @@ const app = new Vue({
     'importancia': 0,
     'importanciaPorClick': 1,
     'importanciaPorTick': 0,
+    'importanciaPorTickMultiplier': 1,
+    'importanciaPorClickMultiplier': 1,
     'mejoras': {
       'emails': {
         'nombre': 'Email',
         'coste': 10,
-        'incremento': 1.1,
+        'incremento': 1.2,
         'total': 0,
         'incrementoImportanciaPorClick': 1,
         'visible': false
@@ -18,7 +20,7 @@ const app = new Vue({
       'emailsCoord': {
         'nombre': 'Email de coordinación',
         'coste': 50,
-        'incremento': 1.1,
+        'incremento': 1.3,
         'total': 0,
         'incrementoImportanciaPorClick': 3,
         'visible': false
@@ -26,7 +28,7 @@ const app = new Vue({
       'llamadasTlf': {
         'nombre': 'Llamada de teléfono',
         'coste': 150,
-        'incremento': 1.1,
+        'incremento': 1.3,
         'total': 0,
         'incrementoImportanciaPorClick': 7,
         'visible': false
@@ -34,7 +36,7 @@ const app = new Vue({
       'TlfEmpresa': {
         'nombre': 'Teléfono de empresa',
         'coste': 500,
-        'incremento': 1.1,
+        'incremento': 1.3,
         'total': 0,
         'incrementoImportanciaPorClick': 10,
         'visible': false
@@ -42,7 +44,7 @@ const app = new Vue({
       'EquipoCargo': {
         'nombre': 'Equipo a cargo',
         'coste': 1500,
-        'incremento': 1.1,
+        'incremento': 1.5,
         'total': 0,
         'incrementoImportanciaPorClick': 15,
         'incrementoImportanciaPorTick': 10,
@@ -51,7 +53,7 @@ const app = new Vue({
       'IdeaJefe': {
         'nombre': 'Dar idea al Jefe',
         'coste': 3000,
-        'incremento': 1.1,
+        'incremento': 1.8,
         'total': 0,
         'incrementoImportanciaPorClick': 20,
         'visible': false
@@ -59,7 +61,7 @@ const app = new Vue({
       'ConsejosJefe': {
         'nombre': 'Dar consejo al Jefe',
         'coste': 5000,
-        'incremento': 1.1,
+        'incremento': 2,
         'total': 0,
         'incrementoImportanciaPorClick': 30,
         'visible': false
@@ -76,18 +78,39 @@ const app = new Vue({
     'timers': {
       'autoImportancia': null
     },
-    'mostrandoAlgunaMejora': false
+    'mostrandoAlgunaMejora': false,
+    'potenciadores': [
+      {
+        'nombre': '¡Arriba equipos!',
+        'descripcion': 'x5 de importancia a cada equipo durante 10 segundos',
+        'importanciaPorTickMultiplier': 5,
+        'duracion': '00:00:10',
+        'mejorasRequeridas': [ 'EquipoCargo' ]
+      },
+      {
+        'nombre': '¡Click-ametralladora!',
+        'descripcion': 'x10 de importancia a cada click durante 5 segundos',
+        'importanciaPorClickMultiplier': 5,
+        'duracion': '00:00:5',
+        'mejorasRequeridas': [ 'emails' ]
+      }
+    ],
+    'potenciadorActivo': null
   },
 
   'methods': {
     'trabajar': function(){
-      this.importancia += this.importanciaPorClick
+      this.importancia += this.calcularImportanciaPorClick()
+    },
+    'calcularImportanciaPorClick': function(){
+      return this.importanciaPorClick * this.importanciaPorClickMultiplier
     },
     'trabajarAuto': function(){
       this.importancia += this.calcularImportanciaPorTick()
     },
     'calcularImportanciaPorTick': function(){
       let importancia = this.importanciaPorTick
+      importancia *= this.importanciaPorTickMultiplier
       return importancia
     },
     'puedeComprar': function(id, cantidad = 1){
@@ -135,12 +158,11 @@ const app = new Vue({
         }
         this.mejoras[id].total = 0
         this.mejoras[id].visible = false
-        console.log(this.mejoras[id])
         index++
       }
     },
     'tieneMejora': function(id){
-      return this.mejoras[id].total > 0
+      return this.mejoras[id] && this.mejoras[id].total > 0
     },
     'formatearNumero': function(n){
       return n.toLocaleString()
@@ -156,6 +178,7 @@ const app = new Vue({
       localStorage.setItem(`BOTWv${datos.version}`, JSON.stringify(datos))
     },
     'cargar': function(){
+      this.potenciadorAleatorio()
       let datos = localStorage.getItem(`BOTWv${this.version}`)
       if(!datos) return this.calcularPreciosIniciales()
       datos = JSON.parse(datos)
@@ -175,6 +198,47 @@ const app = new Vue({
         this.timers.autoImportancia = null
       }
       this.guardar()
+    },
+    randomNumber: function (min, max) {
+      return Math.floor(Math.random() * (max + min)) + min
+    },
+    'temporizadorPotenciadorAleatorio': function(){
+      setTimeout(this.potenciadorAleatorio, this.randomNumber(90, 240) * 1000)
+    },
+    'potenciadorAleatorio': function(){
+      console.log('potenciadorAleatorio')
+      if(this.potenciadorActivo) return this.temporizadorPotenciadorAleatorio()
+      const r = this.randomNumber(0, this.potenciadores.length)
+      if(!this.potenciadores[r]) return this.temporizadorPotenciadorAleatorio()
+      const potenciador = this.potenciadores[r]
+      if(potenciador.mejorasRequeridas){
+        for(let index in potenciador.mejorasRequeridas){
+          if(!this.tieneMejora(potenciador.mejorasRequeridas[index])) return this.temporizadorPotenciadorAleatorio()
+        }
+      }
+      const _this = this
+      this.potenciadorActivo = potenciador
+      new Timer({
+        'duration': potenciador.duracion,
+        'onStart': function(){
+          if(potenciador.importanciaPorTickMultiplier){
+            _this.importanciaPorTickMultiplier += potenciador.importanciaPorTickMultiplier
+          }
+          if(potenciador.importanciaPorClickMultiplier){
+            _this.importanciaPorClickMultiplier += potenciador.importanciaPorClickMultiplier
+          }
+        },
+        'onEnd': function(){
+          if(potenciador.importanciaPorTickMultiplier){
+            _this.importanciaPorTickMultiplier -= potenciador.importanciaPorTickMultiplier
+          }
+          if(potenciador.importanciaPorClickMultiplier){
+            _this.importanciaPorClickMultiplier -= potenciador.importanciaPorClickMultiplier
+          }
+          _this.potenciadorActivo = null
+          _this.temporizadorPotenciadorAleatorio()
+        }
+      })
     }
   },
 
