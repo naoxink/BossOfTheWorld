@@ -5,6 +5,7 @@ const app = new Vue({
     'version': '0.0.1',
     'importancia': 0,
     'importanciaPorClick': 1,
+    'incrementoImportanciaPorTick': 10,
     'mejoras': {
       'emails': {
         'nombre': 'Email',
@@ -12,7 +13,6 @@ const app = new Vue({
         'incremento': 1.3,
         'total': 0,
         'incrementoImportanciaPorClick': 1,
-        'incrementoImportanciaPorTick': 10,
         'visible': false
       },
       'emailsCoord': {
