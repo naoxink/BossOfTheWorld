@@ -87,7 +87,7 @@ const app = new Vue({
       this.importancia += this.calcularImportanciaPorTick()
     },
     'calcularImportanciaPorTick': function(){
-      let importancia = 1
+      let importancia = this.incrementoImportanciaPorTick
       return importancia
     },
     'puedeComprar': function(id, cantidad = 1){
