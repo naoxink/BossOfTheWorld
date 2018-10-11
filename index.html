@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Boss Of The World</title>
+</head>
+<body>
+
+  <!-- app -->
+  <div id="app" v-cloak>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+      <div class="container">
+        <a class="navbar-brand" href="#">Boos Of The World</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" @click="guardar" href="#">Guardar</span></a>
+            <a class="nav-item nav-link" @click="reiniciar" href="#">Reiniciar</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container">
+    
+      <div class="row">
+        <div class="col-sm">
+          <div><strong>Importancia</strong> (Imp): {{ formatearNumero(importancia) }}</div>
+          <div><strong>Importancia por click</strong> (IPC): {{ formatearNumero(importanciaPorClick) }}</div>
+          <div v-if="timers.autoImportancia !== null"><strong>Importancia por segundo</strong>: {{ formatearNumero(calcularImportanciaPorTick()) }}</div>
+        </div>
+        <div class="col-sm">
+          <button class="btn btn-success btn-block" @click="trabajar">Trabajar</button>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col-sm">
+          <h3 v-if="mostrandoAlgunaMejora">Mejoras</h3>
+          <div class="list-group">
+            <div class="mejora" v-for="(mejora, id) in mejoras" v-if="estaCerca(id)">
+              <h5 class="cabecera bg-info text-light">{{ mejora.nombre }} <small class="float-right">Actualmente: {{ mejora.total }}</small></h5>
+              <div class="comprar">
+                <div class="row sin-padding">
+                  <div class="col-lg-4">
+                    <button href="#" class="btn btn-block text-center" v-bind:class="[puedeComprar(id) ? 'btn-success' : 'disabled btn-secondary']" @click="comprarMejora(id)">
+                      <div>Comprar 1</div>
+                      <div>Coste: {{ formatearNumero(mejora.coste) }} Imp</div>
+                      <div>Incremento: +{{ mejora.incrementoImportanciaPorClick }} IPC</div>
+                    </button>
+                  </div>
+                  <div class="col-lg-4">
+                    <button href="#" class="btn btn-block text-center" v-bind:class="[puedeComprar(id, 10) ? 'btn-success' : 'disabled btn-secondary']" @click="comprarMejora(id, 10)">
+                      <div>Comprar 10</div>
+                      <div>Coste: {{ formatearNumero(mejora.coste * 10) }} Imp</div>
+                      <div>Incremento: +{{ mejora.incrementoImportanciaPorClick * 10 }} IPC</div>
+                    </button>
+                  </div>
+                  <div class="col-lg-4">
+                                        <button href="#" class="btn btn-block text-center" v-bind:class="[puedeComprar(id, 100) ? 'btn-success' : 'disabled btn-secondary']" @click="comprarMejora(id, 100)">
+                      <div>Comprar 100</div>
+                      <div>Coste: {{ formatearNumero(mejora.coste * 100) }} Imp</div>
+                      <div>Incremento: +{{ mejora.incrementoImportanciaPorClick * 100 }} IPC</div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+                </div>
+        </div>
+    
+    </div>
+  </div>
+  <!-- !app -->
+
+  <div class="alert alert-info fixed-bottom">
+    Versión en desarrollo. Próximamente más mejoras, multilenguaje y sistema de prestigio.
+  </div>
+
+	<script src="js/include.js"></script>
+	<script>
+		include([
+      'css/main.css',
+      'vendor/bootstrap/css/bootstrap.min.css',
+      'https://code.jquery.com/jquery-3.3.1.min.js',
+      'vendor/bootstrap/js/bootstrap.min.js',
+			'vendor/timer/timer.js',
+      'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js',
+      'js/app.js',
+		], true)
+	</script>
+</body>
+</html>

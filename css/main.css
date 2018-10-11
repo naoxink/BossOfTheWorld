@@ -1,0 +1,37 @@
+body, html {
+	margin: 0;
+  background-color: #FFF;
+}
+
+body {
+  padding-bottom: 50px;
+}
+
+.row {
+  padding: 20px 0;
+}
+.row.sin-padding {
+  padding: 0;
+}
+
+.mejora {
+  padding: 0;
+  margin: 5px;
+  background-color: rgba(0, 0, 0, .1);
+  border: 1px solid rgba(0, 0, 0, .1);
+}
+
+.mejora .cabecera {
+  padding: 10px;
+  margin-bottom: 0;
+}
+
+.mejora .comprar {
+  padding: 10px;
+}
+
+[v-cloak] { display: none }
+
+.alert.fixed-bottom {
+  margin: 0;
+}
