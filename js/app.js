@@ -56,6 +56,7 @@ const app = new Vue({
         'incremento': 1.8,
         'total': 0,
         'incrementoImportanciaPorClick': 20,
+        'incrementoImportanciaPorTick': 50,
         'visible': false
       },
       'ConsejosJefe': {
@@ -64,6 +65,7 @@ const app = new Vue({
         'incremento': 2,
         'total': 0,
         'incrementoImportanciaPorClick': 30,
+        'incrementoImportanciaPorTick': 100,
         'visible': false
       },
       'empresas': {
@@ -72,6 +74,7 @@ const app = new Vue({
         'incremento': 2.3,
         'total': 0,
         'incrementoImportanciaPorClick': 100,
+        'incrementoImportanciaPorTick': 1000,
         'visible': false
       },
     },
