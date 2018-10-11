@@ -5,7 +5,7 @@ const app = new Vue({
     'version': '0.0.2',
     'importancia': 0,
     'importanciaPorClick': 1,
-    'importanciaPorTick': 10,
+    'importanciaPorTick': 0,
     'mejoras': {
       'emails': {
         'nombre': 'Email',
