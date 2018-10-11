@@ -5,7 +5,7 @@ const app = new Vue({
     'version': '0.0.1',
     'importancia': 0,
     'importanciaPorClick': 1,
-    'incrementoImportanciaPorTick': 10,
+    'importanciaPorTick': 10,
     'mejoras': {
       'emails': {
         'nombre': 'Email',
@@ -87,7 +87,7 @@ const app = new Vue({
       this.importancia += this.calcularImportanciaPorTick()
     },
     'calcularImportanciaPorTick': function(){
-      let importancia = this.incrementoImportanciaPorTick
+      let importancia = this.importanciaPorTick
       return importancia
     },
     'puedeComprar': function(id, cantidad = 1){
@@ -109,7 +109,7 @@ const app = new Vue({
       this.mejoras[id].coste *= this.mejoras[id].incremento * cantidad
       this.importanciaPorClick += this.mejoras[id].incrementoImportanciaPorClick * cantidad
       if(this.mejoras[id].incrementoImportanciaPorTick){
-        this.incrementoImportanciaPorTick += this.mejoras[id].incrementoImportanciaPorTick
+        this.importanciaPorTick += this.mejoras[id].incrementoImportanciaPorTick
       }
     },
     'estaCerca': function(id){
