@@ -2,7 +2,7 @@ const app = new Vue({
   'el': '#app',
 
   'data': {
-    'version': '0.0.1',
+    'version': '0.0.2',
     'importancia': 0,
     'importanciaPorClick': 1,
     'importanciaPorTick': 10,
@@ -109,7 +109,7 @@ const app = new Vue({
       this.mejoras[id].coste *= this.mejoras[id].incremento * cantidad
       this.importanciaPorClick += this.mejoras[id].incrementoImportanciaPorClick * cantidad
       if(this.mejoras[id].incrementoImportanciaPorTick){
-        this.importanciaPorTick += this.mejoras[id].incrementoImportanciaPorTick
+        this.importanciaPorTick += this.mejoras[id].incrementoImportanciaPorTick + this.mejoras[id].total
       }
     },
     'estaCerca': function(id){
@@ -135,6 +135,7 @@ const app = new Vue({
         }
         this.mejoras[id].total = 0
         this.mejoras[id].visible = false
+        console.log(this.mejoras[id])
         index++
       }
     },
