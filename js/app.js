@@ -170,6 +170,10 @@ const app = new Vue({
       if(!confirm('Se BORRARÁN TODOS los datos ¿Quieres continuar?')) return false
       this.mejoras['emails'].coste = 10
       this.calcularPreciosIniciales()
+      if(this.timers.autoImportancia !== null){
+        this.timers.autoImportancia.stop()
+        this.timers.autoImportancia = null
+      }
       this.guardar()
     }
   },
