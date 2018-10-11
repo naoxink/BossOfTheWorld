@@ -94,11 +94,11 @@ const app = new Vue({
       return this.importancia >= this.mejoras[id].coste * cantidad
     },
     'iniciarTimerEquipo': function(){
-        this.timers.autoImportancia = new Timer({ 'onTick': _this.trabajarAuto })
+      let _this = this
+      this.timers.autoImportancia = new Timer({ 'onTick': _this.trabajarAuto })
     },
     'comprarMejora': function(id, cantidad = 1){
       if(!this.puedeComprar(id, cantidad)) return false
-      let _this = this
       if(id === 'EquipoCargo'){
         if(this.mejoras[id].total === 0){
           this.iniciarTimerEquipo()
