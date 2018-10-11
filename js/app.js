@@ -10,7 +10,7 @@ const app = new Vue({
       'emails': {
         'nombre': 'Email',
         'coste': 10,
-        'incremento': 1.3,
+        'incremento': 1.1,
         'total': 0,
         'incrementoImportanciaPorClick': 1,
         'visible': false
@@ -18,7 +18,7 @@ const app = new Vue({
       'emailsCoord': {
         'nombre': 'Email de coordinación',
         'coste': 50,
-        'incremento': 1.3,
+        'incremento': 1.1,
         'total': 0,
         'incrementoImportanciaPorClick': 3,
         'visible': false
@@ -26,7 +26,7 @@ const app = new Vue({
       'llamadasTlf': {
         'nombre': 'Llamada de teléfono',
         'coste': 150,
-        'incremento': 1.3,
+        'incremento': 1.1,
         'total': 0,
         'incrementoImportanciaPorClick': 7,
         'visible': false
@@ -34,7 +34,7 @@ const app = new Vue({
       'TlfEmpresa': {
         'nombre': 'Teléfono de empresa',
         'coste': 500,
-        'incremento': 1.3,
+        'incremento': 1.1,
         'total': 0,
         'incrementoImportanciaPorClick': 10,
         'visible': false
@@ -42,7 +42,7 @@ const app = new Vue({
       'EquipoCargo': {
         'nombre': 'Equipo a cargo',
         'coste': 1500,
-        'incremento': 1.3,
+        'incremento': 1.1,
         'total': 0,
         'incrementoImportanciaPorClick': 15,
         'incrementoImportanciaPorTick': 10,
@@ -51,7 +51,7 @@ const app = new Vue({
       'IdeaJefe': {
         'nombre': 'Dar idea al Jefe',
         'coste': 3000,
-        'incremento': 1.3,
+        'incremento': 1.1,
         'total': 0,
         'incrementoImportanciaPorClick': 20,
         'visible': false
@@ -59,7 +59,7 @@ const app = new Vue({
       'ConsejosJefe': {
         'nombre': 'Dar consejo al Jefe',
         'coste': 5000,
-        'incremento': 1.3,
+        'incremento': 1.1,
         'total': 0,
         'incrementoImportanciaPorClick': 30,
         'visible': false
