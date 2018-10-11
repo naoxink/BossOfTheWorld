@@ -12,7 +12,7 @@ const app = new Vue({
         'incremento': 1.3,
         'total': 0,
         'incrementoImportanciaPorClick': 1,
-        'incrementoImportanciaPorTick': 1,
+        'incrementoImportanciaPorTick': 10,
         'visible': false
       },
       'emailsCoord': {
