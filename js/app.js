@@ -103,6 +103,7 @@ const app = new Vue({
 
   'methods': {
     'trabajar': function(){
+      console.log('trabajar')
       this.importancia += this.calcularImportanciaPorClick()
     },
     'calcularImportanciaPorClick': function(){
@@ -247,5 +248,6 @@ const app = new Vue({
 
   'mounted': function(){
     this.cargar()
+    $(window).on('keyup', this.trabajar)
   }
 })

@@ -33,6 +33,7 @@
         </div>
         <div class="col-sm">
           <button class="btn btn-success btn-block" @click="trabajar">Trabajar</button>
+          <small class="text-secondary">Haz click en este botón o pulsa teclas para ganar importancia</small>
           <div v-if="potenciadorActivo" class="alert alert-info">
             <strong>{{ potenciadorActivo.nombre }}<br><small>{{ potenciadorActivo.descripcion }}</small></strong>
           </div>
