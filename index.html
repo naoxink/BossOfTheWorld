@@ -29,7 +29,7 @@
         <div class="col-sm">
           <div><strong>Importancia</strong> (Imp): {{ formatearNumero(importancia) }}</div>
           <div><strong>Importancia por click</strong> (IPC): {{ formatearNumero(calcularImportanciaPorClick()) }}</div>
-          <div v-if="timers.autoImportancia !== null"><strong>Importancia por segundo</strong>: {{ formatearNumero(calcularImportanciaPorTick()) }}</div>
+          <div v-if="timers.autoImportancia !== null"><strong>Importancia por segundo</strong> (IPS): {{ formatearNumero(calcularImportanciaPorTick()) }}</div>
         </div>
         <div class="col-sm">
           <button class="btn btn-success btn-block" @click="trabajar">Trabajar</button>
@@ -44,7 +44,7 @@
         <div class="col-sm">
           <h3 v-if="mostrandoAlgunaMejora">Mejoras</h3>
           <div class="list-group">
-            <div class="mejora" v-for="(mejora, id) in mejoras" v-if="estaCerca(id)">
+            <div class="mejora" v-for="(mejora, id) in mejorasAlReves" v-if="estaCerca(id)">
               <h5 class="cabecera bg-info text-light">{{ mejora.nombre }} <small class="float-right">Actualmente: {{ mejora.total }}</small></h5>
               <div class="comprar">
                 <div class="row sin-padding">

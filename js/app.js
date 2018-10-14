@@ -101,9 +101,18 @@ const app = new Vue({
     'potenciadorActivo': null
   },
 
+  'computed': {
+    'mejorasAlReves': function(){
+      let invertido = {  }
+      let keys = [  ]
+      for(let key in this.mejoras) keys.push(key)
+      for(let i = keys.length - 1; i >= 0; i--) invertido[keys[i]] = this.mejoras[keys[i]]
+      return invertido
+    }
+  },
+
   'methods': {
     'trabajar': function(){
-      console.log('trabajar')
       this.importancia += this.calcularImportanciaPorClick()
     },
     'calcularImportanciaPorClick': function(){
@@ -173,6 +182,8 @@ const app = new Vue({
     },
     'guardar': function(){
       let datos = { }
+      this.ultimoGuardado = Date.now()
+      datos.ultimoGuardado = this.ultimoGuardado
       datos.version = this.version
       datos.importancia = this.importancia
       datos.importanciaPorClick = this.importanciaPorClick
@@ -191,6 +202,7 @@ const app = new Vue({
       this.importanciaPorTick = datos.importanciaPorTick
       this.mejoras = datos.mejoras
       this.mostrandoAlgunaMejora = datos.mostrandoAlgunaMejora
+      this.ultimoGuardado = datos.ultimoGuardado
       if(this.tieneMejora('EquipoCargo')) this.iniciarTimerEquipo()
     },
     'reiniciar': function(){
@@ -210,7 +222,6 @@ const app = new Vue({
       setTimeout(this.potenciadorAleatorio, this.randomNumber(90, 240) * 1000)
     },
     'potenciadorAleatorio': function(){
-      console.log('potenciadorAleatorio')
       if(this.potenciadorActivo) return this.temporizadorPotenciadorAleatorio()
       const r = this.randomNumber(0, this.potenciadores.length)
       if(!this.potenciadores[r]) return this.temporizadorPotenciadorAleatorio()
@@ -249,5 +260,13 @@ const app = new Vue({
   'mounted': function(){
     this.cargar()
     $(window).on('keyup', this.trabajar)
+    if(this.tieneMejora('EquipoCargo')){
+      let fechaCierre = this.ultimoGuardado
+      let fechaAhora = Date.now()
+      let diferenciaTiempo = fechaAhora - fechaCierre
+      let totalGanado = this.calcularImportanciaPorTick() * (diferenciaTiempo / 1000)
+      this.importancia += totalGanado
+      alert(`Tus equipos te han proporcionado ${this.formatearNumero(totalGanado)} de importancia mientras no estabas`)
+    }
   }
 })

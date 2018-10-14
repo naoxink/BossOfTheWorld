@@ -4,7 +4,7 @@ function Timer(options){
 	timer.startTick = new Date() // Inicio de pulso
 	timer.duration = options.duration || '00:00:00' // Duración del contador
 	timer.infinite = timer.duration === '00:00:00' // Indica si el contador no es regresivo
-	timer.msInterval = timer.msInterval || 1000
+	timer.msInterval = options.msInterval || 1000
 	// Calcula los milisegundos a partir de un string con el formato `hh:mm:ss`
 	timer.calcTimeFromString = function(timeString){
 		var time = timeString.split(':')
