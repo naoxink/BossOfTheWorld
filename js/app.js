@@ -2,7 +2,7 @@ const app = new Vue({
   'el': '#app',
 
   'data': {
-    'version': '0.0.2',
+    'version': '0.0.3',
     'importancia': 0,
     'importanciaPorClick': 1,
     'importanciaPorTick': 0,
@@ -265,8 +265,10 @@ const app = new Vue({
       let fechaAhora = Date.now()
       let diferenciaTiempo = fechaAhora - fechaCierre
       let totalGanado = this.calcularImportanciaPorTick() * (diferenciaTiempo / 1000)
-      this.importancia += totalGanado
-      alert(`Tus equipos te han proporcionado ${this.formatearNumero(totalGanado)} de importancia mientras no estabas`)
+      if(!isNaN(totalGanado)){
+        this.importancia += totalGanado
+        alert(`Tus equipos te han proporcionado ${this.formatearNumero(totalGanado)} de importancia mientras no estabas`)
+      }
     }
   }
 })
